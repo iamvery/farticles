@@ -4,7 +4,7 @@ ruby '2.1.0'
 gem 'rails', '4.0.1'
 
 # db
-gem 'sqlite3', group: %i(development test)
+gem 'sqlite3', group: [:development, :test]
 gem 'pg',      group: :production
 
 # assets
