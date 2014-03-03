@@ -5,6 +5,7 @@ gem 'rails', '4.0.1'
 
 # db
 gem 'sqlite3', group: %i(development test)
+gem 'pg',      group: :production
 
 # assets
 gem 'sass-rails', '~> 4.0.0'
