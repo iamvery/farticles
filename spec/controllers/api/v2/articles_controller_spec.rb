@@ -33,4 +33,26 @@ describe Api::V2::ArticlesController do
       expect(article_json.fetch('name')).to eq(article.name)
     end
   end
+
+  describe 'POST #create' do
+    it 'responds with article when successful' do
+      article_name = 'Awesome'
+
+      post_json :create, article: { name: article_name }
+
+      article_json = json.fetch('article')
+
+      expect(response).to be_success
+      expect(article_json.fetch('name')).to eq(article_name)
+    end
+
+    it 'responds with errors when record cannot be created' do
+      post_json :create, article: { name: '' }
+
+      error_json = json.fetch('errors')
+
+      expect(response).to be_unprocessable
+      expect(error_json).to be_present
+    end
+  end
 end

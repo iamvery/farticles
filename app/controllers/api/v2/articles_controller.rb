@@ -14,6 +14,18 @@ module Api
 
         respond_with article
       end
+
+      def create
+        article = Article.create(article_params)
+
+        respond_with :api, :v2, article
+      end
+
+      private
+
+      def article_params
+        params.require(:article).permit(:name)
+      end
     end
   end
 end
