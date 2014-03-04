@@ -3,6 +3,7 @@ require 'spec_helper'
 describe Api::V2::ArticlesController do
   describe 'GET #index' do
     let(:articles_json){ json.fetch('articles') }
+    let(:meta_json)    { json.fetch('meta') }
 
     it 'responds with array of articles' do
       article = Article.create!(name: 'So Good')
@@ -10,6 +11,14 @@ describe Api::V2::ArticlesController do
       get_json :index
 
       expect(articles_json.first.fetch('name')).to eq(article.name)
+    end
+
+    it 'includes article total meta data with response' do
+      Article.create!(name: 'A Thing')
+
+      get_json :index
+
+      expect(meta_json.fetch('total')).to eq(1)
     end
   end
 

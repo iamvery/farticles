@@ -6,7 +6,7 @@ module Api
       def index
         articles = Article.all
 
-        respond_with articles
+        respond_with articles, meta: { total: articles.count }
       end
 
       def show
