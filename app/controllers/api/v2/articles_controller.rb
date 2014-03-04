@@ -1,6 +1,6 @@
 module Api
   module V2
-    class ArticlesController < ApplicationController
+    class ArticlesController < ApiController
       respond_to :json
 
       def index
