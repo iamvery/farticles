@@ -7,7 +7,7 @@ describe Api::V1::ArticlesController do
 
       get_json :index
 
-      expect(json.first.fetch('name')).to eq(article.name)
+      expect(json.first.fetch('title')).to eq(article.name)
     end
   end
 
@@ -17,7 +17,7 @@ describe Api::V1::ArticlesController do
 
       get_json :show, id: article.id
 
-      expect(json.fetch('name')).to eq(article.name)
+      expect(json.fetch('title')).to eq(article.name)
     end
   end
 end
