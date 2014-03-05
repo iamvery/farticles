@@ -74,4 +74,14 @@ describe Api::V2::ArticlesController do
       expect(error_json).to be_present
     end
   end
+
+  describe 'DELETE #destroy' do
+    it 'responds with success' do
+      article = Article.create!(name: 'An Article')
+
+      delete_json :destroy, id: article.id
+
+      expect(response).to be_success
+    end
+  end
 end

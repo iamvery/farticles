@@ -29,6 +29,14 @@ module Api
         respond_with :api, :v2, article
       end
 
+      def destroy
+        article = Article.find(article_id)
+
+        article.destroy
+
+        respond_with :api, :v2, article
+      end
+
       private
 
       def article_id
