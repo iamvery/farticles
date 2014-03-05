@@ -21,6 +21,14 @@ module Api
         respond_with :api, :v2, article
       end
 
+      def update
+        article = Article.find(article_id)
+
+        article.update_attributes(article_params)
+
+        respond_with :api, :v2, article
+      end
+
       private
 
       def article_id

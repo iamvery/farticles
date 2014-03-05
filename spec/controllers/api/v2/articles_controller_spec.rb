@@ -55,4 +55,23 @@ describe Api::V2::ArticlesController do
       expect(error_json).to be_present
     end
   end
+
+  describe 'PATCH #update' do
+    let!(:article){ Article.create!(name: 'Original') }
+
+    it 'responds with success' do
+      patch_json :update, id: article.id, article: { name: 'Updated' }
+
+      expect(response).to be_success
+    end
+
+    it 'responds with errors when record cannot be updated' do
+      patch_json :update, id: article.id, article: { name: '' }
+
+      error_json = json.fetch('errors')
+
+      expect(response).to be_unprocessable
+      expect(error_json).to be_present
+    end
+  end
 end
