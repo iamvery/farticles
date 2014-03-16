@@ -1,10 +1,5 @@
 module JsonHelpers
   %i(get post put patch delete).each do |verb|
-    define_method "#{verb}_json" do |action, options={}|
-      options[:format] ||= :json
-      send(verb, action, options)
-    end
-
     api_versions = [1, 2]
 
     api_versions.each do |version|
