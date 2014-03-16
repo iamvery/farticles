@@ -1,14 +1,14 @@
 require 'spec_helper'
 
-describe Api::V2::ArticlesController do
-  describe 'GET #index' do
+describe 'articles v2 endpoint' do
+  describe 'index' do
     let(:articles_json){ json.fetch('articles') }
     let(:meta_json)    { json.fetch('meta') }
 
-    it 'responds with array of articles' do
+    it 'responds with list of articles' do
       article = Article.create!(name: 'So Good')
 
-      get_json :index
+      get_v2 '/api/articles.json'
 
       expect(articles_json.first.fetch('name')).to eq(article.name)
     end
@@ -16,19 +16,19 @@ describe Api::V2::ArticlesController do
     it 'includes article total meta data with response' do
       Article.create!(name: 'A Thing')
 
-      get_json :index
+      get_v2 '/api/articles.json'
 
       expect(meta_json.fetch('total')).to eq(1)
     end
   end
 
-  describe 'GET #show' do
+  describe 'show' do
     let(:article_json){ json.fetch('article') }
 
     it 'responds with the article' do
       article = Article.create!(name: 'Very Nice')
 
-      get_json :show, id: article.id
+      get_v2 "/api/articles/#{article.id}.json"
 
       expect(article_json.fetch('name')).to eq(article.name)
     end
@@ -38,7 +38,7 @@ describe Api::V2::ArticlesController do
     it 'responds with article when successful' do
       article_name = 'Awesome'
 
-      post_json :create, article: { name: article_name }
+      post_v2 "/api/articles.json", article: { name: article_name }
 
       article_json = json.fetch('article')
 
@@ -47,7 +47,7 @@ describe Api::V2::ArticlesController do
     end
 
     it 'responds with errors when record cannot be created' do
-      post_json :create, article: { name: '' }
+      post_v2 "/api/articles.json", article: { name: '' }
 
       error_json = json.fetch('errors')
 
@@ -60,13 +60,13 @@ describe Api::V2::ArticlesController do
     let!(:article){ Article.create!(name: 'Original') }
 
     it 'responds with success' do
-      patch_json :update, id: article.id, article: { name: 'Updated' }
+      patch_v2 "/api/articles/#{article.id}.json", article: { name: 'Updated' }
 
       expect(response).to be_success
     end
 
     it 'responds with errors when record cannot be updated' do
-      patch_json :update, id: article.id, article: { name: '' }
+      patch_v2 "/api/articles/#{article.id}.json", article: { name: '' }
 
       error_json = json.fetch('errors')
 
@@ -79,7 +79,7 @@ describe Api::V2::ArticlesController do
     it 'responds with success' do
       article = Article.create!(name: 'An Article')
 
-      delete_json :destroy, id: article.id
+      delete_v2 "/api/articles/#{article.id}.json"
 
       expect(response).to be_success
     end
