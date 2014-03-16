@@ -1,0 +1,76 @@
+<h2>Articles</h2>
+
+<section>
+  <article>
+    <h3>Collection</h3>
+
+    <h4>List all Articles</h4>
+
+    <pre><code>GET /api/articles</code></pre>
+
+    <h5>Response</h5>
+
+    <pre>
+      <code>
+        200 (OK)
+        Content-Type: application/json
+      </code>
+    </pre>
+
+    <pre>
+      <code>
+        [
+          {
+            "id": 1, "name": "One Article"
+          }, {
+            "id": 2, "name": "Another Article"
+          }
+        ]
+      </code>
+    </pre>
+  </article>
+
+  <article>
+    <h3>Record</h3>
+
+    <h4>Retrieve an Article</h4>
+
+    <pre><code>GET /api/articles/{id}</code></pre>
+
+    <h5>Parameters</h5>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>id</td>
+          <td>Numeric <code>id</code> of the Article</td>
+          <td>number; required<br/>example: 1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h5>Response</h5>
+
+    <pre>
+      <code>
+        200 (OK)
+        Content-Type: application/json
+      </code>
+    </pre>
+
+    <pre>
+      <code>
+        {
+          "id": 1, "name": "One Article"
+        }
+      </code>
+    </pre>
+  </article>
+</section>
+<p><%= link_to 'Back to Endpoints', doc_v1_path %></p>

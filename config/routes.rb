@@ -8,4 +8,17 @@ Farticles::Application.routes.draw do
       resources :articles
     end
   end
+
+  def doc(resource=nil, options={})
+    path = ['doc', options[:prefix], resource].flatten.compact.join('/')
+    get path => 'docs#show', id: path
+  end
+
+  doc #index
+
+  doc :v1
+  doc :articles, prefix: :v1
+
+  doc :v2
+  doc :articles, prefix: :v2
 end

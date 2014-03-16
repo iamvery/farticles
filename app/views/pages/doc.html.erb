@@ -1,0 +1,20 @@
+<h3>Request Headers</h3>
+<p>
+  All API requests are automatically routed to the most recent release version
+  of the API. While this is true, it is still appropriate to specify the
+  desired API version in your requests to prevent regressions.
+</p>
+<p>
+  Include the following Accept header with each request:
+</p>
+
+<pre>
+  <code>
+    Accept: application/vnd.farticles.v{number}
+  </code>
+</pre>
+
+<ul>
+  <li><%= link_to 'Version 1 Docs', doc_v1_path %></li>
+  <li><%= link_to 'Version 2 Docs', doc_v2_path %></li>
+</ul>
