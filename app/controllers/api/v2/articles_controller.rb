@@ -18,7 +18,7 @@ module Api
       def create
         article = Article.create(article_params)
 
-        respond_with :api, :v2, article
+        respond_with :api, article
       end
 
       def update
@@ -26,7 +26,7 @@ module Api
 
         article.update_attributes(article_params)
 
-        respond_with :api, :v2, article
+        respond_with :api, article
       end
 
       def destroy
@@ -34,7 +34,7 @@ module Api
 
         article.destroy
 
-        respond_with :api, :v2, article
+        respond_with :api, article
       end
 
       private
