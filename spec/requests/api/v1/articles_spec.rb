@@ -1,21 +1,21 @@
 require 'spec_helper'
 
-describe Api::V1::ArticlesController do
-  describe 'GET #index' do
-    it 'responds with array of articles' do
+describe 'articles v1 endpoint' do
+  describe 'index' do
+    it 'responds with a list of articles' do
       article = Article.create!(name: 'So Good')
 
-      get_json :index
+      get_v1 '/api/articles.json'
 
       expect(json.first.fetch('title')).to eq(article.name)
     end
   end
 
-  describe 'GET #show' do
+  describe 'show' do
     it 'responds with the article' do
       article = Article.create!(name: 'Very Nice')
 
-      get_json :show, id: article.id
+      get_v1 "/api/articles/#{article.id}.json"
 
       expect(json.fetch('title')).to eq(article.name)
     end
