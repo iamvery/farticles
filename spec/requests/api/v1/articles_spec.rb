@@ -13,11 +13,15 @@ describe 'articles v1 endpoint' do
 
   describe 'show' do
     it 'responds with the article' do
-      article = Article.create!(name: 'Very Nice')
+      category1 = Category.create!(name: 'News')
+      category2 = Category.create!(name: 'Gossip')
+      article   = Article.create!(name: 'Very Nice', categories: [category1, category2])
 
       get_v1 "/api/articles/#{article.id}.json"
 
       expect(json.fetch('title')).to eq(article.name)
+      # v1 api only supports 1 category
+      expect(json.fetch('category')).to eq(category1.name)
     end
   end
 end
