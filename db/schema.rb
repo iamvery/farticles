@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140317015004) do
+ActiveRecord::Schema.define(version: 20140317015241) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "articles", force: true do |t|
     t.string "name", null: false
@@ -20,5 +23,13 @@ ActiveRecord::Schema.define(version: 20140317015004) do
   create_table "categories", force: true do |t|
     t.string "name", null: false
   end
+
+  create_table "categorizations", force: true do |t|
+    t.integer "article_id",  null: false
+    t.integer "category_id", null: false
+  end
+
+  add_foreign_key "categorizations", "articles", name: "categorizations_article_id_fk", dependent: :delete
+  add_foreign_key "categorizations", "categories", name: "categorizations_category_id_fk", dependent: :delete
 
 end
