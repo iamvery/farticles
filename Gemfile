@@ -5,6 +5,7 @@ gem 'rails', '4.0.1'
 
 # db
 gem 'pg'
+gem 'foreigner'
 
 # assets
 gem 'sass-rails', '~> 4.0.0'
