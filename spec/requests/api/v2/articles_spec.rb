@@ -26,11 +26,18 @@ describe 'articles v2 endpoint' do
     let(:article_json){ json.fetch('article') }
 
     it 'responds with the article' do
-      article = Article.create!(name: 'Very Nice')
+      news    = Category.create!(name: 'News')
+      gossip  = Category.create!(name: 'Gossip')
+      article = Article.create!(name: 'Very Nice', categories: [news, gossip])
 
       get_v2 "/api/articles/#{article.id}.json"
 
+      category_json = article_json.fetch('categories')
+
       expect(article_json.fetch('name')).to eq(article.name)
+      expect(category_json.length).to eq(2)
+      expect(category_json.first.fetch('name')).to eq(news.name)
+      expect(category_json.last.fetch('name')).to eq(gossip.name)
     end
   end
 
