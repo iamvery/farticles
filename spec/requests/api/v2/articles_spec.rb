@@ -43,14 +43,17 @@ describe 'articles v2 endpoint' do
 
   describe 'POST #create' do
     it 'responds with article when successful' do
+      category     = Category.create!(name: 'News')
       article_name = 'Awesome'
 
-      post_v2 "/api/articles.json", article: { name: article_name }
+      post_v2 "/api/articles.json", article: { name: article_name, category_ids: [category.id] }
 
       article_json = json.fetch('article')
+      category_json = article_json.fetch('categories')
 
       expect(response).to be_success
       expect(article_json.fetch('name')).to eq(article_name)
+      expect(category_json.first.fetch('name')).to eq(category.name)
     end
 
     it 'responds with errors when record cannot be created' do
@@ -68,12 +71,14 @@ describe 'articles v2 endpoint' do
 
     it 'responds with success' do
       new_name = 'Updated!'
+      category = Category.create!(name: "Things")
       patch_v2 "/api/articles/#{article.id}.json", article: { name: new_name, category_ids: [category.id] }
 
       expect(response).to be_success
 
       article.reload
       expect(article.name).to eq(new_name)
+      expect(article.categories.first.name).to eq(category.name)
     end
 
     it 'responds with errors when record cannot be updated' do
