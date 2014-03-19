@@ -67,9 +67,13 @@ describe 'articles v2 endpoint' do
     let!(:article){ Article.create!(name: 'Original') }
 
     it 'responds with success' do
-      patch_v2 "/api/articles/#{article.id}.json", article: { name: 'Updated' }
+      new_name = 'Updated!'
+      patch_v2 "/api/articles/#{article.id}.json", article: { name: new_name, category_ids: [category.id] }
 
       expect(response).to be_success
+
+      article.reload
+      expect(article.name).to eq(new_name)
     end
 
     it 'responds with errors when record cannot be updated' do
