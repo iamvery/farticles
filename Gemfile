@@ -4,8 +4,8 @@ ruby '2.1.0'
 gem 'rails', '4.0.1'
 
 # db
-gem 'sqlite3', group: [:development, :test]
-gem 'pg',      group: :production
+gem 'pg'
+gem 'foreigner'
 
 # assets
 gem 'sass-rails', '~> 4.0.0'

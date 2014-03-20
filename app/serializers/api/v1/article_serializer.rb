@@ -3,10 +3,14 @@ module Api
     class ArticleSerializer < ActiveModel::Serializer
       self.root = false
 
-      attributes :id, :title
+      attributes :id, :title, :category
 
       def title
         object.name
+      end
+
+      def category
+        object.categories.first.try(:name)
       end
     end
   end
