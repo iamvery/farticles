@@ -1,4 +1,4 @@
-class ApiVersionConstraint
+class ApiConstraint
   def initialize(options)
     @version = options.fetch(:version)
   end

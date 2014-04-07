@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ApiVersionConstraint do
+describe ApiConstraint do
   describe '#matches?' do
     it 'matches requests for api version' do
       version = 1
