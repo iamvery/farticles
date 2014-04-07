@@ -4,7 +4,7 @@ Farticles::Application.routes.draw do
       resources :articles
     end
 
-    scope module: :v2 do
+    scope module: :v2, constraints: ApiConstraint.new(version: 2) do
       resources :articles
     end
   end
